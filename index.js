@@ -109,38 +109,39 @@ const storage = multer.diskStorage({
 const upload = multer({storage});
 
 app.post('/add-product/:id', upload.array('photos',8),async (req,resp)=>{
-    let photoPaths = req.files.map(file => file.path);
-    let ID = req.params.id;
-    let arg = req.body.category.toLowerCase();
-    let check = await Category.findOne({name:arg});
-    let data;
-    if(check){
-        data = check._id;
-    }
-    else{
-        let categories = new Category({name:arg});
-        let res = await categories.save();
-        data = res._id;
-    }
-    let obj={title:req.body.title,highlights:req.body.highlights,
-        photos:photoPaths,
-        category:req.body.category,
-        category_id:data,
-        seller_id:ID,
-        rating:req.body.rating,
-        price:req.body.price,
-        discount_price:req.body.discount_price,
-        TotalQty:req.body.TotalQty,
-        SoldQty:0,
-        Status:'Available',
-        SellerStatus:'Active',
-        deliveryDays:req.body.deliveryDays,
-        deliveryCharges:req.body.deliveryCharges,
-        PaymentMethod:'Cash On Delivery'
-    }
-    let products = new Product(obj);
-    let result = await products.save();
-    resp.send(result);
+    // let photoPaths = req.files.map(file => file.path);
+    // let ID = req.params.id;
+    // let arg = req.body.category.toLowerCase();
+    // let check = await Category.findOne({name:arg});
+    // let data;
+    // if(check){
+    //     data = check._id;
+    // }
+    // else{
+    //     let categories = new Category({name:arg});
+    //     let res = await categories.save();
+    //     data = res._id;
+    // }
+    // let obj={title:req.body.title,highlights:req.body.highlights,
+    //     photos:photoPaths,
+    //     category:req.body.category,
+    //     category_id:data,
+    //     seller_id:ID,
+    //     rating:req.body.rating,
+    //     price:req.body.price,
+    //     discount_price:req.body.discount_price,
+    //     TotalQty:req.body.TotalQty,
+    //     SoldQty:0,
+    //     Status:'Available',
+    //     SellerStatus:'Active',
+    //     deliveryDays:req.body.deliveryDays,
+    //     deliveryCharges:req.body.deliveryCharges,
+    //     PaymentMethod:'Cash On Delivery'
+    // }
+    // let products = new Product(obj);
+    // let result = await products.save();
+    // resp.send(result);
+   
 });
 
 // < ======== Add Product End =============>
